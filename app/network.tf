@@ -11,7 +11,6 @@ resource "google_compute_subnetwork" "gke_app_usc1" {
 
   ip_cidr_range = "10.24.96.0/23"
   network = google_compute_network.gke_main_vpc.id
-  private_ipv6_google_access = true
 
   secondary_ip_range {
     range_name    = "pod-ranges"
@@ -31,7 +30,6 @@ resource "google_compute_subnetwork" "gke_app_use1" {
 
   ip_cidr_range = "10.24.100.0/23"
   network = google_compute_network.gke_main_vpc.id
-  private_ipv6_google_access = true
 
   secondary_ip_range {
     range_name    = "pod-ranges"

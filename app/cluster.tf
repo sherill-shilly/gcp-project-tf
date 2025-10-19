@@ -45,12 +45,6 @@ resource "google_container_node_pool" "tools_nodepool_usc1" {
   cluster  = google_container_cluster.tools_cluster_usc1.name
 
   node_count = 1
-  max_pods_per_node = 32
-
-  autoscaling {
-    min_node_count  = 1
-    max_node_count = 3
-  }
 
   node_config {
     machine_type = "e2-medium"
@@ -60,10 +54,6 @@ resource "google_container_node_pool" "tools_nodepool_usc1" {
     tags = [local.tools_usc1]
 
     service_account = "terraform@github-actions-475520.iam.gserviceaccount.com"
-  }
-
-  management {
-    auto_repair  = true
   }
 
 }
