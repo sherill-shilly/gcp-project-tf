@@ -44,7 +44,7 @@ resource "google_container_node_pool" "tools_nodepool_usc1" {
   project   = var.project
   cluster  = google_container_cluster.tools_cluster_usc1.name
 
-
+  node_count = 1
   max_pods_per_node = 32
 
   autoscaling {
