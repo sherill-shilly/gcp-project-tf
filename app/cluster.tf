@@ -50,7 +50,6 @@ resource "google_container_node_pool" "tools_nodepool_usc1" {
     machine_type = "e2-medium"
     image_type   = "UBUNTU_CONTAINERD"
     disk_size_gb    = 20
-    preemptible   = false
     tags = [local.tools_usc1]
 
     service_account = "terraform@github-actions-475520.iam.gserviceaccount.com"
