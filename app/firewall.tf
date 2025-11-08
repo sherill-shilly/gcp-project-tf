@@ -118,3 +118,47 @@
 #    protocol = "all"
 #  }
 #}
+
+resource "google_compute_firewall" "allow-internal" {
+  name    = "internal-firewall"
+  project   = var.project
+  network = google_compute_network.gke_main_vpc.id
+
+  allow {
+    protocol = "all"
+  }
+
+  source_ranges = ["10.24.96.0/23"]
+}
+
+# Firewall-2 for External Access SSH, icmp, RDP
+resource "google_compute_firewall" "allow-external" {
+  name    = "external-firewall"
+  project   = var.project
+  network = google_compute_network.gke_main_vpc.id
+
+  allow {
+    protocol = "icmp"
+  }
+
+  allow {
+    protocol = "tcp"
+    ports    = ["22", "3389"]
+  }
+
+  source_ranges = ["0.0.0.0/0"]
+}
+
+# Firewall-3 for GKE Communication
+resource "google_compute_firewall" "allow-gke" {
+  name    = "gke-firewall"
+  project   = var.project
+  network = google_compute_network.gke_main_vpc.id
+
+  allow {
+    protocol = "tcp"
+    ports    = ["443", "10250", "15017"]
+  }
+
+  source_ranges = ["0.0.0.0/0"]
+}
